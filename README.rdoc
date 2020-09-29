@@ -1,0 +1,6 @@
+= damu
+
+Describe your project here
+
+:include:damu.rdoc
+
