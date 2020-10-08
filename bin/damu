@@ -14,7 +14,7 @@ class App
 
   program_desc 'Describe your application here'
 
-  version Damu::VERSION
+  version DaMu::VERSION
 
   subcommand_option_handling :normal
   arguments :strict
