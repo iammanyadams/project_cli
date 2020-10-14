@@ -1,3 +1,3 @@
-module Da
-  VERSION = '0.0.1'
+module Damu
+  VERSION = "0.1.0"
 end
