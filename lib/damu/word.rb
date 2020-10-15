@@ -1,23 +1,60 @@
-module Damu
 class Word
-  attr_reader :word, :score, :numSyllables, :defs, :tags
+
+  attr_reader :word, :score, :numSyllable, :tags, :defs
+  attr_accessor  :re
   @@all = []
-  def initialize(response_hash)
-    @word = response_hash["word"]
-    @score = response_hash["score"]
-    @numSyllables = response_hash["numSyllables"]
-    @tags = response_hash["tags"]
-    @defs = response_hash["defs"]
+
+  def initialize(re)
+    @word = re["word"]
+    @score = re["score"]
+    @numSyllable = re["numSyllable"]
+    @tags = re["tags"]
+    @defs = re["defs"]
     save
   end
 
-  def self.all
-    @@all
+    def self.all
+      @@all
+    end
+
+    def save
+      @@all << self
+    end
+
+    def self.clear
+      @@all = []
+    end
   end
 
-  def save
-    @@all << self
-  end
 
-end
-end
+
+
+
+
+
+
+#  class Word
+#    attr_reader :word, :score, :numSyllables, :defs, :tags, :re
+#    @@all = []
+#
+#    def initialize(re)
+#      @word = re["word"]
+#      @score = re["score"]
+#      @numSyllables = re["numSyllables"]
+#      @tags = re["tags"]
+#      @defs = re["defs"]
+#      save
+#    end
+#
+#    def self.all
+#      @@all
+#    end
+#
+#    def save
+#      @@all << self
+#    end
+#
+#    def self.clear
+#      @@all = []
+#    end
+#  end

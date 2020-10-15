@@ -1,15 +1,11 @@
 require 'apicake'
 require 'pry'
-require 'clamp'
+require 'httparty'
 
 
 require_relative './damu/version'
-require_relative './damu/api'
-require_relative './damu/term'
-require_relative './damu/damu'
-#require_relative './damu/cli'
+require_relative './damu/word'
+require_relative './damu/request'
+require_relative './damu/cli'
 
 
-module Damu
-  puts 'hello'
-end
