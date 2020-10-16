@@ -1,15 +1,33 @@
+require_relative './da.rb'
+
 class Mu
-  attr_accessor :word, :score, :numSyllables, :tags, :defs
+  extend Da
+  attr_accessor :word, :tags, :defs, :score, :numSyllable, :info, :all
   @@all = []
 
-  def initialize(res)
-    @word = res["word"]
-    @score = res["score"]
-    @numSyllables = res["numSyllables"]
-    @tags = res["tags"]
-    @defs = res["defs"]
+
+  def self.new_from_words(res)
+    self.new(
+      res["word"],
+      res["tags"],
+      res["defs"],
+      res["score"],
+      res["numSyllable"],
+      res["info"]
+      )
+  end
+
+  def initialize(word=nil, tags=nil, defs=nil, score=nil, numSyllable=nil, info=nil)
+    @word = word
+    @tags = tags
+    @defs = defs
+    @score = score
+    @numSyllable = numSyllable
+    @info = info
+    @@all << self
     save
   end
+
 
   def save
     @@all << self
@@ -23,5 +41,8 @@ class Mu
     self.all[id-1]
   end
 
+  def self.clear
+    @@all = []
+  end
 
 end
