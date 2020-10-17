@@ -6,38 +6,40 @@ module Da
     base_uri 'api.datamuse.com'
     attr_accessor :criteria
 
-    def Da.words(parameters)
+    def self.words(parameters)
       get('/words', query: parameters)
     end
 
-    def Da.suggests(parameters)
+    def self.suggests(parameters)
       get('/sug', query: parameters)
     end
 
-
+    def find_words(da)
+      self.words(da)
+    end
     def query_parameters
       @criteria={
-        :sounds_like=>"sl:",
-        :means_like=>"ml:",
-        :spelled_like=>"sp:",
-        :related_adj=>"rel_jja:",
-        :related_noun=>"rel_jjb:",
-        :synonyms=>"rel_syn:",
-        :triggers=>"rel_trg:",
-        :antonyms=>"rel_ant:",
-        :kind_of=>"rel_spc:",
-        :more_general=>"rel_gen:",
-        :comprises=>"rel_com:",
-        :part_of=>"rel_par:",
-        :frequent_followers=>"rel_bga:",
-        :frequently_follows=>"rel_bgb:",
-        :rhymes=>"rel_rhy:",
-        :kinda_rhymes=>"rel_nry:",
-        :homophones=>"rel_hom:",
-        :consonants_match=>"rel_cns:",
-        :topics=>"topics:",
-        :often_follow=>"lc:",
-        :often_before=>"rc:"
+        sl:"sounds_like",
+        ml:"means_like",
+        sp:"spelled_like",
+        rel_jja:"related_adj",
+        rel_jjb:"related_noun",
+        rel_syn:"synonyms",
+        rel_trg:"triggers",
+        rel_ant:"antonyms",
+        rel_spc:"kind_of",
+        rel_gen:"more_general",
+        rel_com:"comprises",
+        rel_par:"part_of",
+        rel_bga:"frequent_followers",
+        rel_bgb:"frequently_follows",
+        rel_rhy:"rhymes",
+        rel_nry:"kinda_rhymes",
+        rel_hom:"homophones",
+        rel_cns:"consonants_match",
+        topics:"topics",
+        lc:"often_follow",
+        rc:"often_before"
         }
      end
 

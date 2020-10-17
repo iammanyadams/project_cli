@@ -6,16 +6,16 @@ class Mu
   @@all = []
 
 
-  def self.new_from_words(res)
-    self.new(
-      res["word"],
-      res["tags"],
-      res["defs"],
-      res["score"],
-      res["numSyllable"],
-      res["info"]
-      )
-  end
+#  def self.new_from_words(res)
+#    self.new(
+#      res["word"],
+#      res["tags"],
+#      res["defs"],
+#      res["score"],
+#      res["numSyllable"],
+#      res["info"]
+#      )
+#  end
 
   def initialize(word=nil, tags=nil, defs=nil, score=nil, numSyllable=nil, info=nil)
     @word = word

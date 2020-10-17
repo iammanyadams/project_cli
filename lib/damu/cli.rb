@@ -1,41 +1,46 @@
 require 'highline/import'
 
-
 class CLI
+
+
   def call
     say("welcome")
-    menu
-    bye
+    criteria = ask("select a criteria", self.list)
+    p criteria
+    criteria_key = Da.query_parameters.key(criteria)
+    selection = ask("which word?")
+    parameters = "#{criteria_key}: '#{selection}'"
+    Da.words("#{parameters}")
+binding.pry
+
   end
+
+# Da.words "#{criteria_key}: #{selection}"
 
   def menu
-    criteria = Da::CRITERIA.keys.to_s
-    criteria_sel = ask("select a criteria #{criteria}.") do |q|
-      q.readline = true
-      q.echo = true
-     end
-    query = ask("which word")
-    Da.words("#{criteria_sel}: #{query}")
   end
 
-  def list_criteria
-    Da::CRITERIA.all.each.with_index(1) do |word, index|
-      puts "#{index}. #{word}"
-   end
-  end
 
-  def word_details(selection)
-   sel =  Mu.all["#{selection}"]
-  puts sel.word
-  puts sel.defs
-  puts sel.tags
-    end
+  def list
+    q = Da.query_parameters.values.to_a
+    a = q.first(7)
+    c = q.last(7)
+    b = q - a - c
+    puts "#{a}".gsub(", \"", " ").gsub("\"", " ")
+    puts "#{b}".gsub(", \"", " ").gsub("\"", " ")
+    puts "#{c}".gsub(", \"", " ").gsub("\"", " ")
+  end
 
 
   def bye
-    say("goodbye")
-    exit
   end
 
 end
-    
+
+#    self.find_words(criteria, selection) 
+#  end
+#
+#  def find_words(criteria, selection)
+#    criteria_key = Da.query_parameters.key(criteria)
+#    da = "#{criteria_key}: '#{selection}'"
+#    Da.find_words(da)
