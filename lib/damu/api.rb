@@ -6,11 +6,12 @@ class Datamuse < APICake::Base
 
   def self.words(**args)
     res = get('/words', query: args)
-    Word.new = OpenStruct.new(res.parsed_response)
-  end
+    res.each_with_index{|r,i| Word.new = OpenStruct.new(r i)}
+    end
 
   def self.sug(**args)
     res = get('/sug', query: args)
-    Word.new = OpenStruct.new(res.parsed_response)
+    Word.new(resp = res.parsed_response)
   end
+
 end
