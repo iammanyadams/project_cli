@@ -1,46 +1,19 @@
-require 'highline/import'
+module Damu
+  class CLI < Command
+    class_option :verbose, type: :boolean
+    class_option :noop, type: :boolean
 
-class CLI
+    desc "hello NAME", "say hello to NAME"
+    long_desc Help.text(:hello)
+    option :from, desc: "from person"
+    def hello(name="you")
+      puts "from: #{options[:from]}" if options[:from]
+      puts "Hello #{name}"
+    end
 
-
-  def call
-    say("welcome")
-    criteria = ask("select a criteria", self.list)
-    p criteria
-    criteria_key = Da.query_parameters.key(criteria)
-    selection = ask("which word?")
-    parameters = "#{criteria_key}: '#{selection}'"
-    Da.words("#{parameters}")
-binding.pry
-
+    desc "version", "prints version"
+    def version
+      puts Damu::VERSION
+    end
   end
-
-# Da.words "#{criteria_key}: #{selection}"
-
-  def menu
-  end
-
-
-  def list
-    q = Da.query_parameters.values.to_a
-    a = q.first(7)
-    c = q.last(7)
-    b = q - a - c
-    puts "#{a}".gsub(", \"", " ").gsub("\"", " ")
-    puts "#{b}".gsub(", \"", " ").gsub("\"", " ")
-    puts "#{c}".gsub(", \"", " ").gsub("\"", " ")
-  end
-
-
-  def bye
-  end
-
 end
-
-#    self.find_words(criteria, selection) 
-#  end
-#
-#  def find_words(criteria, selection)
-#    criteria_key = Da.query_parameters.key(criteria)
-#    da = "#{criteria_key}: '#{selection}'"
-#    Da.find_words(da)

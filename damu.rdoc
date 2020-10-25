@@ -1,5 +1,0 @@
-= damu
-
-Generate this with
-    damu _doc
-After you have described your command line interface

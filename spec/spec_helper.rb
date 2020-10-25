@@ -1,36 +1,22 @@
-ENV["SINATRA_ENV"] = "test"
+ENV["TEST"] = "1"
 
-require_relative '../config/environment'
-require 'rack/test'
-require 'capybara/rspec'
-require 'capybara/dsl'
+# require "simplecov"
+# SimpleCov.start
 
-if ActiveRecord::Migrator.needs_migration?
-  raise 'Migrations are pending. Run `rake db:migrate SINATRA_ENV=test` to resolve the issue.'
-end
+require "pp"
 
-ActiveRecord::Base.logger = nil
+root = File.expand_path("../../", __FILE__)
+require "#{root}/lib/Damu"
 
-RSpec.configure do |config|
-  config.run_all_when_everything_filtered = true
-  config.filter_run :focus
-  config.include Rack::Test::Methods
-  config.include Capybara::DSL
-  DatabaseCleaner.strategy = :truncation
-
-  config.before do
-    DatabaseCleaner.clean
+module Helpers
+  def execute(cmd)
+    puts "Running: #{cmd}" if ENV["DEBUG"]
+    out = `#{cmd}`
+    puts out if ENV["DEBUG"]
+    out
   end
-
-  config.after do
-    DatabaseCleaner.clean
-  end
-
-  config.order = 'default'
 end
 
-def app
-  Rack::Builder.parse_file('config.ru').first
+RSpec.configure do |c|
+  c.include Helpers
 end
-
-Capybara.app = app
