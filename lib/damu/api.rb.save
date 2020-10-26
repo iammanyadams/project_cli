@@ -2,6 +2,7 @@ require 'apicake'
 require 'ostruct'
 module Damu
   extend self
+  using 
 
   WORD_METHODS = {
     means_like: :ml, sounds_like: :sl, spelled_like: :sp, related_popular_nouns: :rel_jja,
@@ -25,6 +26,8 @@ module Damu
     Request.words(@query)
   end
 end
+
+
 
 
 end
