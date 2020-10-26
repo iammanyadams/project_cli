@@ -1,12 +1,12 @@
 $:.unshift(File.expand_path("../", __FILE__))
 require "damu/version"
 require "damu/api"
-require "damu/word"
+require "damu/cli"
 
 
 
-module Damu
-  autoload :Help, "damu/help"
-  autoload :Command, "damu/command"
-  autoload :CLI, "damu/cli"
+module Findable
+  def find_by_name(name)
+    self.all.detect {|obj| obj.name ==name}
+  end
 end
